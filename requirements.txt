@@ -1,0 +1,17 @@
+Bio==1.8.0
+leidenalg==0.10.2
+matplotlib==3.3.4
+nmslib==2.1.1
+numpy==1.19.5
+openTSNE==1.0.2
+pandas==1.1.5
+plotnine==0.8.0
+psutil==6.1.0
+python_igraph==0.11.8
+roman==3.3
+scikit_learn==1.6.1
+scipy==1.5.4
+seaborn==0.11.2
+torch==1.10.2
+umap==0.1.1
+umap_learn==0.5.7

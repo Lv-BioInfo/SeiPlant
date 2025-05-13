@@ -3,14 +3,6 @@
 the Sei architecture, this model enables high-resolution inference of chromatin states directly from raw DNA sequences 
 across diverse plant species.
 
-## Key Features
-
-- Cross-species modeling for plant epigenomics
-- Multi-task prediction of histone marks (e.g., H3K4me3, H3K27ac)
-- Tested on representative monocots and dicots (e.g., *Oryza sativa*, *Zea mays*, *Arabidopsis thaliana*)
-- Supports both species-specific and generalization settings
-- One-click sequence-to-signal pipeline outputting BigWig and BedGraph
-
 ## Schematic Diagram
 
 <div style="text-align: center;">
@@ -19,7 +11,24 @@ across diverse plant species.
 
 Figure 1. Workflow of the SeiPlant framework for cross-species prediction of chromatin features in plants.
 
+## Key Features
+- Cross-species modeling for plant epigenomics
+- Multi-task prediction of histone marks (e.g., H3K4me3, H3K27ac)
+- Tested on representative monocots and dicots (e.g., *Oryza sativa*, *Zea mays*, *Arabidopsis thaliana*)
+- Supports both species-specific and generalization settings
+- One-click sequence-to-signal pipeline outputting BigWig and BedGraph
+
 ## Quick Start
+### Install and use it by Git
+
+```bash
+### Python enviroment constructed by Conda
+conda create -n SeiPlant python=3.6
+conda activate SeiPlant
+git clone https://github.com/Lv-BioInfo/SeiPlant.git
+pip install -r requirements.txt
+```
+
 ### Step 1: Prepare FASTA Input and Generate Genomic Windows
 
 Provide a reference genome in **FASTA** format for the species of interest. To tile the genome:
@@ -32,7 +41,13 @@ Provide a reference genome in **FASTA** format for the species of interest. To t
 
 Example usage:
 ```bash
-python make_prediction_bed.py --fasta fasta/arabidopsis_thaliana.fa --size fasta/arabidopsis_thaliana.size --species arabidopsis_thaliana --output_path ./bed/ --window_size 1024 --step_size 128
+python make_prediction_bed.py \ 
+  --fasta fasta/arabidopsis_thaliana.fa \
+  --size fasta/arabidopsis_thaliana.size \
+  --species arabidopsis_thaliana \
+  --output_path ./bed/ \
+  --window_size 1024 \
+  --step_size 128
 ```
 
 > You may also download example reference genomes and pre-processed input from [Zenodo](https://zenodo.org/) or  *(links provided in `/data` folder)*
@@ -47,16 +62,6 @@ Feed the `.fasta` file into the pretrained **SeiPlant** model to obtain chromati
   - **H3K4ME3**, **H3K27AC**, **H3K4ME1**, **H3K9AC**, **H3K36ME3**
 - Output: `.npy` file containing **multi-label** prediction scores aligned with each genomic window
 
-Example usage:
-```bash
-python prediction.py --model_path Score_regression_cross_osa_zma_HFT_BC_20250312_171305_1024_nip_feature7.model --model_tag_file shuffle_tag_osa_zma.txt --species arabidopsis_thaliana --fa_path ./bed/arabidopsis_thal
-iana_1024_128.fa --output_dir ./bedgraph --seq_len 1024 --batch_size 256
-```
-
----
-
-### Step 3: Assemble Signal Files (BedGraph & BigWig)
-
 Post-process model predictions into standard genome browser formats:
 
 1. **Align scores** to central genomic coordinates (e.g., `start+448`, `end–576`)
@@ -64,6 +69,20 @@ Post-process model predictions into standard genome browser formats:
 3. Export **per-mark BedGraph files**
 4. Convert to **BigWig** using UCSC’s `bedGraphToBigWig`
 
+Example usage:
+```bash
+python prediction.py --model_path ./models/Brassicaceae_20250312_203749_1024_nip_feature7.model \
+  --model_tag_file ./models/histone_modification_tag.txt \
+  --species arabidopsis_thaliana \
+  --fa_path ./bed/arabidopsis_thaliana_1024_128.fa \
+  --output_dir ./bedgraph \
+  --seq_len 1024 \
+  --batch_size 256
+```
+
+---
+
+### Step 3: Exchange Signal Files (BedGraph & BigWig)
 Example command:
 ```bash
 bedGraphToBigWig H3K4ME3.bedgraph chrom.sizes H3K4ME3.bw
