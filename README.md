@@ -14,7 +14,7 @@ across diverse plant species.
 ## Schematic Diagram
 
 <div style="text-align: center;">
-    <img src="img/Fig1.jpg" alt="fig1" width="1000" height="800">
+    <img src="img/Fig1.jpg" alt="fig1" width="1000" height="400">
 </div>
 
 Figure 1. Workflow of the SeiPlant framework for cross-species prediction of chromatin features in plants.
