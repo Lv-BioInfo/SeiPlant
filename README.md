@@ -50,8 +50,8 @@ python make_prediction_bed.py \
   --step_size 128
 ```
 
-> You may also download example reference genomes and pre-processed input from [Zenodo](https://zenodo.org/) or  *(links provided in `/data` folder)*
-
+> You can also download sample reference genomes and trained model parameters from [Zenodo] (https://zenodo.org/) 
+> and place them in the /fasta and /models folders, respectively.
 ---
 
 ### Step 2: Run Prediction Using Pretrained SeiPlant Model
@@ -64,10 +64,9 @@ Feed the `.fasta` file into the pretrained **SeiPlant** model to obtain chromati
 
 Post-process model predictions into standard genome browser formats:
 
-1. **Align scores** to central genomic coordinates (e.g., `start+448`, `end–576`)
+1. **Align scores** to central genomic coordinates (e.g., `start+448`, `start+576`)
 2. **Filter** weak signals (< 0.01) and **normalize** (Min–Max scaling to 0.1–1.0)
 3. Export **per-mark BedGraph files**
-4. Convert to **BigWig** using UCSC’s `bedGraphToBigWig`
 
 Example usage:
 ```bash
@@ -83,6 +82,8 @@ python prediction.py --model_path ./models/Brassicaceae_20250312_203749_1024_nip
 ---
 
 ### Step 3: Exchange Signal Files (BedGraph & BigWig)
+4. Convert to **BigWig** using UCSC’s `bedGraphToBigWig`
+
 Example command:
 ```bash
 bedGraphToBigWig H3K4ME3.bedgraph chrom.sizes H3K4ME3.bw
