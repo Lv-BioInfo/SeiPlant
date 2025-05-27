@@ -50,7 +50,7 @@ python make_prediction_bed.py \
   --step_size 128
 ```
 
-> You can also download sample reference genomes and trained model parameters from [Zenodo] (https://zenodo.org/) 
+> You can also download sample reference genomes and trained model parameters from [Zenodo](https://doi.org/10.5281/zenodo.15421964) 
 > and place them in the /fasta and /models folders, respectively.
 ---
 
@@ -88,6 +88,14 @@ Example command:
 ```bash
 bedGraphToBigWig H3K4ME3.bedgraph chrom.sizes H3K4ME3.bw
 ```
+
+## Citation
+If you use `SeiPlant` in your work, please cite it.
+> **Cross-Species Prediction of Histone Modifications in Plants via Deep Learning**
+>
+> Tongxuan Lv, Quan Han, Yilin Li, Chen Liang, Zhonghao Ruan, Haoyu Chao, Ming Chen, Dijun Chen
+> 
+> bioRxiv 2025.05.19.655006; doi: [https://doi.org/10.1101/2025.05.19.655006](https://doi.org/10.1101/2025.05.19.655006).
 
 ## Contact
 Any questions or suggestions on SeiPlant are welcomed! Please report it on issues, or contact Dijun Chen (dijunchen@nju.edu.cn).
