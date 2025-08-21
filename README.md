@@ -6,7 +6,7 @@ across diverse plant species.
 ## Schematic Diagram
 
 <div style="text-align: center;">
-    <img src="img/Fig1.jpg" alt="fig1" width="1000" height="400">
+    <img src="img/experimental_roadmap.jpg" alt="fig1" width="1000" height="500">
 </div>
 
 Figure 1. Workflow of the SeiPlant framework for cross-species prediction of chromatin features in plants.
@@ -89,6 +89,14 @@ Example command:
 bedGraphToBigWig H3K4ME3.bedgraph chrom.sizes H3K4ME3.bw
 ```
 
+### Ablation Study Used
+For specific details on the ablation experiment, please visit the following files in the `experiments/ablation` directory:
+[`ablation`](experiments/ablation/ablation.md)   
+
+### Ablation Study Used
+For specific details on the compare methods experiment, please visit the following files in the `experiments/comparative_methods` directory:
+[`comparative_methods`](experiments/comparative_methods/compare_methods.md)  
+
 ## Citation
 If you use `SeiPlant` in your work, please cite it.
 > **Cross-Species Prediction of Histone Modifications in Plants via Deep Learning**
@@ -96,6 +104,16 @@ If you use `SeiPlant` in your work, please cite it.
 > Tongxuan Lv, Quan Han, Yilin Li, Chen Liang, Zhonghao Ruan, Haoyu Chao, Ming Chen, Dijun Chen
 > 
 > bioRxiv 2025.05.19.655006; doi: [https://doi.org/10.1101/2025.05.19.655006](https://doi.org/10.1101/2025.05.19.655006).
+
+We also welcome citation of related studies:
+
+> **A sequence-based global map of regulatory activity for deciphering human genetics**  
+> Chen KM, Wong AK, Troyanskaya OG, Zhou J  
+> *Nature Genetics*. 2022; 54:940–949. doi: [https://doi.org/10.1038/s41588-022-01102-2](https://doi.org/10.1038/s41588-022-01102-2)  
+
+> **Deep learning on chromatin profiles reveals the cis-regulatory sequence code of the rice genome**  
+> Zhou X, Ruan Z, Zhang C, Kaufmann K, Chen D  
+> *Journal of Genetics and Genomics*. 2024; S1673852724003564. doi: [https://doi.org/10.1016/j.jgg.2024.12.007](https://doi.org/10.1016/j.jgg.2024.12.007)  
 
 ## Contact
 Any questions or suggestions on SeiPlant are welcomed! Please report it on issues, or contact Dijun Chen (dijunchen@nju.edu.cn).
