@@ -3,21 +3,27 @@ import numpy as np
 import torch
 import os
 import psutil
+import sys
+
+sys.path.append("../")
 from utils.data_utils import load_and_preprocess_data_notag
 from utils.data import NucDataset
 from models.model_architectures import sei_model
 from utils.preprocessing import *
 
+
 def print_mem(tag=""):
     pid = os.getpid()
     process = psutil.Process(pid)
-    mem = process.memory_info().rss / (1024**2)
+    mem = process.memory_info().rss / (1024 ** 2)
     print(f"[MEM] {tag}: {mem:.2f} MB", flush=True)
+
 
 def make_tag_dict(tag_file):
     with open(tag_file) as f:
         tag_list = f.readlines()
     return {item.strip(): index for index, item in enumerate(tag_list)}
+
 
 def predict_new_data(model_path, new_data_path, model_tag_file, seq_len, device, common_tags, batch_size=256):
     print(f"\nLoading and preprocessing new data from {new_data_path} ...")
@@ -62,6 +68,7 @@ def predict_new_data(model_path, new_data_path, model_tag_file, seq_len, device,
     print("Prediction complete!")
     return filtered_predictions
 
+
 def load_bed_file_with_pandas(bed_path):
     """
     使用 pandas 读取 BED 文件，并更新原始的 `start` 和 `end` 列，
@@ -87,6 +94,7 @@ def load_bed_file_with_pandas(bed_path):
 
     return bed_data
 
+
 def load_bed_file(bed_path):
     """
     读取BED文件，返回一个Numpy数组，其中每一行是BED文件中的一行（即包含3列）。
@@ -96,13 +104,14 @@ def load_bed_file(bed_path):
     bed_data = np.loadtxt(bed_path, dtype=str, delimiter="\t")
     # 获取起始位置（第二列）和终止位置（第三列）
     start = bed_data[:, 1].astype(np.int64)  # 第二列是 start
-    end = bed_data[:, 2].astype(np.int64)    # 第三列是 end
+    end = bed_data[:, 2].astype(np.int64)  # 第三列是 end
 
     # 对第二列 (start) 加上448，对第三列 (end) 加上576
     bed_data[:, 1] = (start + 448).astype(np.int64)  # 修改 start
     bed_data[:, 2] = (start + 576).astype(np.int64)  # 修改 end
 
     return bed_data
+
 
 def save_bedgraph_with_predictions(bed_data, predictions, common_tags, output_dir):
     os.makedirs(output_dir, exist_ok=True)
@@ -132,6 +141,7 @@ def save_bedgraph_with_predictions(bed_data, predictions, common_tags, output_di
         np.set_printoptions(precision=20, suppress=True)
         np.savetxt(bedgraph_file_path, bedgraph_data, fmt="%s\t%s\t%s\t%s", delimiter="\t")
         print(f"Saved {tag}.bedgraph to {bedgraph_file_path}")
+
 
 def process_predictions_narrow_peak(values, new_min=0.1, new_max=1.0):
     """
@@ -168,6 +178,7 @@ def process_predictions_narrow_peak(values, new_min=0.1, new_max=1.0):
 
     return values
 
+
 def process_predictions_narrow_peak_hvu(values, new_min=0, new_max=1.0):
     """
     处理预测值数据：
@@ -203,6 +214,7 @@ def process_predictions_narrow_peak_hvu(values, new_min=0, new_max=1.0):
 
     return values
 
+
 def main():
     parser = argparse.ArgumentParser(description="Predict histone modification signals using a trained model.")
     parser.add_argument("--model_path", required=True, help="Path to trained model file (.model)")
@@ -217,7 +229,7 @@ def main():
     args = parser.parse_args()
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Using device: {device}")
-    
+
     species = args.species
     common_tags = set()
     with open(args.model_tag_file, "r", encoding="utf-8") as f:
@@ -258,6 +270,7 @@ def main():
     bed_data = load_bed_file_with_pandas(bed_file_path)
     save_bedgraph_with_predictions(bed_data, predictions, common_tags, result_dir)
     print(f"Combined BED and predictions saved at: {result_dir}")
+
 
 if __name__ == "__main__":
     main()

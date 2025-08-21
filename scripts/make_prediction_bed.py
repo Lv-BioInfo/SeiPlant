@@ -1,8 +1,10 @@
+# -*- coding: utf-8 -*-
 import os
 import re
 import argparse
 from Bio import SeqIO
 import roman
+
 
 def parse_chromosome(chrom):
     match = re.match(r'chr(\d+)([ABD]?)|chr(Un)', chrom)
@@ -11,6 +13,7 @@ def parse_chromosome(chrom):
         letter_part = match.group(2) if match.group(2) else 'Z'
         return (num_part, letter_part)
     return (float('inf'), 'Z')
+
 
 def parse_chr_numeric(chrom):
     """
@@ -23,15 +26,13 @@ def parse_chr_numeric(chrom):
     else:
         return float('inf')  # 不匹配的染色体放到最后
 
+
 def generate_sliding_window(chrom_size_file, fa_file, output_path, species_name, window_size=1024, step_size=128):
-    
     output_fa_path = os.path.join(output_path, f"{species_name}_{window_size}_{step_size}.fa")
     output_bed_path = os.path.join(output_path, f"{species_name}_{window_size}_{step_size}_filtered.bed")
 
-    if os.path.exists(output_bed_path):
-        os.remove(output_bed_path)
-    if os.path.exists(output_fa_path):
-        os.remove(output_fa_path)
+    # 确保输出目录存在
+    os.makedirs(output_path, exist_ok=True)
 
     chrom_sizes = {}
     with open(chrom_size_file, 'r') as f:
@@ -39,7 +40,7 @@ def generate_sliding_window(chrom_size_file, fa_file, output_path, species_name,
             chrom, size = line.strip().split('\t')
             if len(chrom) <= 5:
                 chrom_sizes[chrom] = int(size)
-    
+
     if species_name == "triticum_aestivum":
         sorted_chroms = sorted(chrom_sizes.items(), key=lambda x: parse_chromosome(x[0]))
     elif species_name == "roman":
@@ -67,6 +68,7 @@ def generate_sliding_window(chrom_size_file, fa_file, output_path, species_name,
                 if all(base in 'ATCG' for base in subseq.upper()):
                     bed_output.write(f"{chrom}\t{start}\t{end}\n")
                     fa_output.write(f">{chrom}:{start}-{end}\n{subseq}\n")
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Generate genome-wide sliding windows from FASTA and .size file.")

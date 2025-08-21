@@ -23,10 +23,11 @@ Figure 1. Workflow of the SeiPlant framework for cross-species prediction of chr
 
 ```bash
 ### Python enviroment constructed by Conda
-conda create -n SeiPlant python=3.6
+conda create -n SeiPlant python=3.8
 conda activate SeiPlant
 git clone https://github.com/Lv-BioInfo/SeiPlant.git
 pip install -r requirements.txt
+pip install torch==2.1.2+cu118 torchvision==0.16.2+cu118 torchaudio==2.1.2+cu118 -f https://download.pytorch.org/whl/torch_stable.html
 ```
 
 ### Step 1: Prepare FASTA Input and Generate Genomic Windows
@@ -75,6 +76,7 @@ python prediction.py --model_path ./models/Brassicaceae_20250312_203749_1024_nip
   --species arabidopsis_thaliana \
   --fa_path ./bed/arabidopsis_thaliana_1024_128.fa \
   --output_dir ./bedgraph \
+  --bed_file ./bed/arabidopsis_thaliana_1024_128_filtered.bed \
   --seq_len 1024 \
   --batch_size 256
 ```
@@ -84,7 +86,10 @@ python prediction.py --model_path ./models/Brassicaceae_20250312_203749_1024_nip
 ### Step 3: Exchange Signal Files (BedGraph & BigWig)
 4. Convert to **BigWig** using UCSC’s `bedGraphToBigWig`
 
+you need to install **ucsc-tools** first.
+
 Example command:
+
 ```bash
 bedGraphToBigWig H3K4ME3.bedgraph chrom.sizes H3K4ME3.bw
 ```
