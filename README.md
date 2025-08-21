@@ -6,7 +6,7 @@ across diverse plant species.
 ## Schematic Diagram
 
 <div style="text-align: center;">
-    <img src="img/experimental_roadmap.jpg" alt="fig1" width="1000" height="500">
+    <img src="img/Fig1.jpg" alt="fig1" width="1000" height="500">
 </div>
 
 Figure 1. Workflow of the SeiPlant framework for cross-species prediction of chromatin features in plants.
@@ -29,6 +29,27 @@ git clone https://github.com/Lv-BioInfo/SeiPlant.git
 pip install -r requirements.txt
 pip install torch==2.1.2+cu118 torchvision==0.16.2+cu118 torchaudio==2.1.2+cu118 -f https://download.pytorch.org/whl/torch_stable.html
 ```
+- **models/**
+  - **model_architectures/**
+    - `model.py` — Model architecture definition
+  - `model.pth` — **[Download from Zenodo]**
+  - `tag` — **[Download from Zenodo]**
+
+- **scripts/**
+  - **fasta/**
+    - `species.fa` — **[Download from Zenodo]**
+    - `species.size` — **[Download from Zenodo]**
+  - `make_bedgraph.py` — Convert bigWig to bedGraph
+  - `make_prediction_bed.py` — Run predictions in bed format
+  - `prediction.py` — Inference script
+  - `train.py` — Training script
+  - `evaluate.py` — Evaluation script
+
+- **utils/**
+  - Utility functions for data processing & model training
+
+> You can download sample reference genomes and trained model parameters from [Zenodo](https://doi.org/10.5281/zenodo.15421964) 
+> and place them in the /fasta and /models folders, respectively.
 
 ### Step 1: Prepare FASTA Input and Generate Genomic Windows
 
@@ -51,8 +72,6 @@ python make_prediction_bed.py \
   --step_size 128
 ```
 
-> You can also download sample reference genomes and trained model parameters from [Zenodo](https://doi.org/10.5281/zenodo.15421964) 
-> and place them in the /fasta and /models folders, respectively.
 ---
 
 ### Step 2: Run Prediction Using Pretrained SeiPlant Model
