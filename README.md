@@ -104,8 +104,8 @@ Post-process model predictions into standard genome browser formats:
 
 Example usage:
 ```bash
-python prediction.py --model_path ./models/Brassicaceae_20250312_203749_1024_nip_feature7.model \
-  --model_tag_file ./models/histone_modification_tag.txt \
+python prediction.py --model_path ../models/Brassicaceae_20250312_203749_1024_nip_feature7.model \
+  --model_tag_file ../models/histone_modification_tag.txt \
   --species arabidopsis_thaliana \
   --fa_path ./bed/arabidopsis_thaliana_1024_128.fa \
   --output_dir ./bedgraph \
@@ -113,7 +113,6 @@ python prediction.py --model_path ./models/Brassicaceae_20250312_203749_1024_nip
   --seq_len 1024 \
   --batch_size 256
 ```
-
 ---
 
 ### Step 3: Exchange Signal Files (BedGraph & BigWig)
