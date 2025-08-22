@@ -131,14 +131,11 @@ bedGraphToBigWig H3K4ME3.bedgraph chrom.sizes H3K4ME3.bw
 > 📌 You can download it from [UCSC Genome Browser utilities](http://hgdownload.soe.ucsc.edu/admin/exe/).  
 > Make sure the **`chrom.sizes`** file matches the reference genome you are using.
 
-
-
-
 ### Ablation Study Used
 For specific details on the ablation experiment, please visit the following files in the `experiments/ablation` directory:
 [`ablation`](experiments/ablation/ablation.md)   
 
-### Ablation Study Used
+### Compare Methods Study Used
 For specific details on the compare methods experiment, please visit the following files in the `experiments/comparative_methods` directory:
 [`comparative_methods`](experiments/comparative_methods/compare_methods.md)  
 
