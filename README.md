@@ -19,7 +19,7 @@ Figure 1. Workflow of the SeiPlant framework for cross-species prediction of chr
 - One-click sequence-to-signal pipeline outputting BigWig and BedGraph
 
 ## Quick Start
-### Install and use it by Git
+### Configure the operating environment
 
 ```bash
 ### Python enviroment constructed by Conda
@@ -27,8 +27,20 @@ conda create -n SeiPlant python=3.8
 conda activate SeiPlant
 git clone https://github.com/Lv-BioInfo/SeiPlant.git
 pip install -r requirements.txt
-pip install torch==2.1.2+cu118 torchvision==0.16.2+cu118 torchaudio==2.1.2+cu118 -f https://download.pytorch.org/whl/torch_stable.html
+
+# Install PyTorch (adjust the version according to your system environment)
+pip install torch==2.1.2+cu118 torchvision==0.16.2+cu118 torchaudio==2.1.2+cu118 \
+    -f https://download.pytorch.org/whl/torch_stable.html
 ```
+> **Note**: In our experiments, we used **PyTorch 2.1.2 with CUDA 11.8**.  
+> This specific version was chosen because our server’s **GLIBC version** was low to support latest PyTorch releases.  
+> Please install the latest PyTorch version compatible with your own system environment 
+> (see [PyTorch official installation guide](https://pytorch.org/get-started/locally/)).
+
+### Download the corresponding file to the specified folder.
+The SeiPlant project requires some files to be **manually downloaded from Zenodo** and placed into the correct folders. 
+Below is the directory structure with notes on which files you need to provide:
+
 - **models/**
   - **model_architectures/**
     - `model.py` — Model architecture definition
@@ -48,8 +60,10 @@ pip install torch==2.1.2+cu118 torchvision==0.16.2+cu118 torchaudio==2.1.2+cu118
 - **utils/**
   - Utility functions for data processing & model training
 
-> You can download sample reference genomes and trained model parameters from [Zenodo](https://doi.org/10.5281/zenodo.15421964) 
-> and place them in the /fasta and /models folders, respectively.
+> **Note**  
+> You can download the **sample reference genomes** and **trained model parameters** from  
+> 👉 [Zenodo (DOI: 10.5281/zenodo.15421964)](https://doi.org/10.5281/zenodo.15421964)  
+> and place them in the **`/scripts/fasta/`** and **`/models/`** folders, respectively.
 
 ### Step 1: Prepare FASTA Input and Generate Genomic Windows
 
@@ -103,15 +117,22 @@ python prediction.py --model_path ./models/Brassicaceae_20250312_203749_1024_nip
 ---
 
 ### Step 3: Exchange Signal Files (BedGraph & BigWig)
-4. Convert to **BigWig** using UCSC’s `bedGraphToBigWig`
 
-you need to install **ucsc-tools** first.
-
-Example command:
+1. Prepare your **BedGraph** file (e.g., `H3K4ME3.bedgraph`).
+2. Make sure you have the chromosome sizes file (e.g., `chrom.sizes`).
+3. Install **UCSC tools** (provides `bedGraphToBigWig`).
+4. Convert to **BigWig** format:
 
 ```bash
 bedGraphToBigWig H3K4ME3.bedgraph chrom.sizes H3K4ME3.bw
 ```
+> **Note**  
+> **bedGraphToBigWig** is part of the **UCSC utilities**.  
+> 📌 You can download it from [UCSC Genome Browser utilities](http://hgdownload.soe.ucsc.edu/admin/exe/).  
+> Make sure the **`chrom.sizes`** file matches the reference genome you are using.
+
+
+
 
 ### Ablation Study Used
 For specific details on the ablation experiment, please visit the following files in the `experiments/ablation` directory:
