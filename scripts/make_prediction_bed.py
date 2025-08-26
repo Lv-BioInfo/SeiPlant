@@ -38,7 +38,7 @@ def generate_sliding_window(chrom_size_file, fa_file, output_path, species_name,
     with open(chrom_size_file, 'r') as f:
         for line in f:
             chrom, size = line.strip().split('\t')
-            if len(chrom) <= 5:
+            if len(chrom) <= 10:
                 chrom_sizes[chrom] = int(size)
 
     if species_name == "triticum_aestivum":
