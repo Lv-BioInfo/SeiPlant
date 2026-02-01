@@ -138,13 +138,17 @@ For specific details on the ablation experiment, please visit the following file
 For specific details on the compare methods experiment, please visit the following files in the `experiments/comparative_methods` directory:
 [`comparative_methods`](experiments/comparative_methods/compare_methods.md)  
 
+### Plotting Code Provided
+
+For specific details on the plotting methods used in our study, please visit the following files in the `docs/plotting` directory:
+[`plotting`](docs/plotting/code/prediction_remake.ipynb)
+
 ## Citation
-If you use `SeiPlant` in your work, please cite it.
-> **Cross-Species Prediction of Histone Modifications in Plants via Deep Learning**
->
-> Tongxuan Lv, Quan Han, Yilin Li, Chen Liang, Zhonghao Ruan, Haoyu Chao, Ming Chen, Dijun Chen
-> 
-> bioRxiv 2025.05.19.655006; doi: [https://doi.org/10.1101/2025.05.19.655006](https://doi.org/10.1101/2025.05.19.655006).
+If you use `SeiPlant` in your work, please cite:
+
+> **Lv T, Han Q, Li Y, Liang C, Ruan Z, Chao H, Chen M, Chen D.**
+> Cross-species prediction of histone modifications in plants via deep learning.
+> *Genome Biology* (2026). https://doi.org/10.1186/s13059-025-03929-4
 
 We also welcome citation of related studies:
 
