@@ -130,6 +130,10 @@ bedGraphToBigWig H3K4ME3.bedgraph chrom.sizes H3K4ME3.bw
 > 📌 You can download it from [UCSC Genome Browser utilities](http://hgdownload.soe.ucsc.edu/admin/exe/).  
 > Make sure the **`chrom.sizes`** file matches the reference genome you are using.
 
+### Train from Scratch Guide Provided
+We provide a complete from-scratch training guide used in this study, including data preparation, scoring criteria, and training procedures.  
+For details, please refer to: [`train_from_scratch`](docs/train_from_scratch.md)
+
 ### Ablation Study Used
 For specific details on the ablation experiment, please visit the following files in the `experiments/ablation` directory:
 [`ablation`](experiments/ablation/ablation.md)   
