@@ -11,6 +11,7 @@ To train SeiPlant for a single species (or a species group), you need:
 1. **Reference genome**
    * `species.fa` (FASTA)
    * `species.size` (chromosome sizes)
+   The Zenodo file used in this study contains the fa and size files for Arabidopsis thaliana.
 
 2. **Chromatin tracks or peak labels** for each epigenomic feature (per tissue/condition if applicable)
    * Recommended formats:
@@ -57,8 +58,7 @@ After window generation, the training dataset is constructed by pairing:
 with a feature scoring strategy (see the **Experimental Details** section for the exact scoring definition).
 
 As a practical reference implementation, you may also check the example script:
-
-* `stat_mergedtag_latest.py` (example)
+* [`stat_mergedtag_latest.py`](stat_mergedtag_latest.py)  
 
 #### Two common label strategies
 
